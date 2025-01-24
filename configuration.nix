@@ -11,8 +11,13 @@
     ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+    supportedFilesystems = [ "ntfs" ];
+  };
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -51,12 +56,16 @@
 
   # Configure keymap in X11
   services.xserver.xkb = {
-    layout = "us";
-    variant = "";
+    layout = "pl";
+
   };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+
+  # IIO hardware sensor enable
+
+  hardware.sensor.iio.enable = true;
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
@@ -77,11 +86,13 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  users.groups.docker = {};
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.wj = {
     isNormalUser = true;
     description = "wj";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker"];
     packages = with pkgs; [
     #  thunderbird
     ];
@@ -106,6 +117,7 @@ services = {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    cryptsetup
     vim
     firefox
     neovim
@@ -115,6 +127,7 @@ services = {
     bat
     zoxide
     git
+    git-lfs
     vscode
     nodejs_22
     easyeffects
@@ -129,6 +142,16 @@ services = {
     libreoffice-qt
     hunspell
   ];
+
+  #docker
+  virtualisation.docker = {
+    enable = true;
+    enableOnBoot = true;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

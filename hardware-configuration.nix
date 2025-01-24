@@ -28,6 +28,15 @@
     [ { device = "/dev/disk/by-uuid/f62f4ffe-de79-46f1-961f-90092872d741"; }
     ];
 
+
+  boot.initrd.luks.devices."sd".device = "/dev/disk/by-uuid/f6bbea6d-57fb-488b-bdf8-b6744e6677f9";
+
+  fileSystems."/sd" =
+    { device = "/dev/mapper/sd";
+      fsType = "ext4";
+    };
+
+
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction
