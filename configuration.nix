@@ -131,6 +131,7 @@ services = {
     vscode
     nodejs_22
     easyeffects
+    postman
     spotify
     thunderbird
     librewolf
@@ -139,8 +140,12 @@ services = {
     discord
     samsung-unified-linux-driver
     splix
+    vlc
+    libvlc
     libreoffice-qt
+    mp4v2
     hunspell
+    gnomeExtensions.auto-brightness-toggle
   ];
 
   #docker
@@ -152,6 +157,8 @@ services = {
       setSocketVariable = true;
     };
   };
+
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
