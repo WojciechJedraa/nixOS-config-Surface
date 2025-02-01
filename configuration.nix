@@ -143,8 +143,14 @@ services = {
     vlc
     libvlc
     libreoffice-qt
-    mp4v2
     hunspell
+    #android
+    android-tools
+    android-studio
+    android-studio-tools
+    #ios
+
+    #gnome
     gnomeExtensions.auto-brightness-toggle
   ];
 
