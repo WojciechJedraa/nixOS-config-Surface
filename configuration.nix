@@ -144,6 +144,7 @@ services = {
     libvlc
     libreoffice-qt
     hunspell
+    typescript
     #android
     android-tools
     android-studio
